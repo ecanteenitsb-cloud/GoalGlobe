@@ -9,6 +9,7 @@ export interface Team {
   name: string;
   logo: string;
   color: string;
+  leagueId: string; // Used to ensure consistent match generation
 }
 
 export interface League {
@@ -93,60 +94,88 @@ export const MOCK_LEAGUES: League[] = [
 
 // Using football-data.org public IDs for real logos
 export const MOCK_TEAMS: Record<string, Team> = {
-  // Europe
-  "real": { id: "real", name: "Real Madrid", logo: "https://crests.football-data.org/86.png", color: "white" },
-  "city": { id: "city", name: "Man City", logo: "https://crests.football-data.org/65.png", color: "skyblue" },
-  "bayern": { id: "bayern", name: "Bayern Munich", logo: "https://crests.football-data.org/5.png", color: "red" },
-  "psg": { id: "psg", name: "PSG", logo: "https://crests.football-data.org/524.png", color: "navy" },
-  "barca": { id: "barca", name: "Barcelona", logo: "https://crests.football-data.org/81.png", color: "blue" },
-  "liverpool": { id: "liverpool", name: "Liverpool", logo: "https://crests.football-data.org/64.png", color: "red" },
-  "arsenal": { id: "arsenal", name: "Arsenal", logo: "https://crests.football-data.org/57.png", color: "red" },
-  "juve": { id: "juve", name: "Juventus", logo: "https://crests.football-data.org/109.png", color: "black" },
-  "inter": { id: "inter", name: "Inter Milan", logo: "https://crests.football-data.org/108.png", color: "blue" },
-  "acmilan": { id: "acmilan", name: "AC Milan", logo: "https://crests.football-data.org/98.png", color: "red" },
-  "dortmund": { id: "dortmund", name: "Dortmund", logo: "https://crests.football-data.org/4.png", color: "yellow" },
-  "atletico": { id: "atletico", name: "Atletico Madrid", logo: "https://crests.football-data.org/78.png", color: "red" },
-  "chelsea": { id: "chelsea", name: "Chelsea", logo: "https://crests.football-data.org/61.png", color: "blue" },
-  "manutd": { id: "manutd", name: "Man United", logo: "https://crests.football-data.org/66.png", color: "red" },
-  "tottenham": { id: "tottenham", name: "Tottenham", logo: "https://crests.football-data.org/73.png", color: "white" },
-  "newcastle": { id: "newcastle", name: "Newcastle", logo: "https://crests.football-data.org/67.png", color: "black" },
-  "napoli": { id: "napoli", name: "Napoli", logo: "https://crests.football-data.org/113.png", color: "skyblue" },
-  "roma": { id: "roma", name: "AS Roma", logo: "https://crests.football-data.org/100.png", color: "red" },
-  "lazio": { id: "lazio", name: "Lazio", logo: "https://crests.football-data.org/110.png", color: "skyblue" },
-  "bayer": { id: "bayer", name: "Bayer Leverkusen", logo: "https://crests.football-data.org/3.png", color: "red" },
-  "leipzig": { id: "leipzig", name: "RB Leipzig", logo: "https://crests.football-data.org/721.png", color: "white" },
+  // Premier League
+  "city": { id: "city", name: "Man City", logo: "https://crests.football-data.org/65.png", color: "skyblue", leagueId: "pl" },
+  "liverpool": { id: "liverpool", name: "Liverpool", logo: "https://crests.football-data.org/64.png", color: "red", leagueId: "pl" },
+  "arsenal": { id: "arsenal", name: "Arsenal", logo: "https://crests.football-data.org/57.png", color: "red", leagueId: "pl" },
+  "chelsea": { id: "chelsea", name: "Chelsea", logo: "https://crests.football-data.org/61.png", color: "blue", leagueId: "pl" },
+  "manutd": { id: "manutd", name: "Man United", logo: "https://crests.football-data.org/66.png", color: "red", leagueId: "pl" },
+  "tottenham": { id: "tottenham", name: "Tottenham", logo: "https://crests.football-data.org/73.png", color: "white", leagueId: "pl" },
+  "newcastle": { id: "newcastle", name: "Newcastle", logo: "https://crests.football-data.org/67.png", color: "black", leagueId: "pl" },
   
-  // Asia (Using placeholders/emojis where IDs aren't standard or available in free tier)
-  "alnassr": { id: "alnassr", name: "Al Nassr", logo: "https://upload.wikimedia.org/wikipedia/en/c/c5/Al_Nassr_FC_Logo.svg", color: "yellow" },
-  "alhilal": { id: "alhilal", name: "Al Hilal", logo: "https://upload.wikimedia.org/wikipedia/en/c/cd/Al_Hilal_SFC_Logo.svg", color: "blue" },
-  "vissel": { id: "vissel", name: "Vissel Kobe", logo: "https://upload.wikimedia.org/wikipedia/en/7/72/Vissel_Kobe_logo.svg", color: "crimson" },
-  "ulsan": { id: "ulsan", name: "Ulsan Hyundai", logo: "https://upload.wikimedia.org/wikipedia/en/9/92/Ulsan_Hyundai_FC_logo.svg", color: "blue" },
+  // La Liga
+  "real": { id: "real", name: "Real Madrid", logo: "https://crests.football-data.org/86.png", color: "white", leagueId: "laliga" },
+  "barca": { id: "barca", name: "Barcelona", logo: "https://crests.football-data.org/81.png", color: "blue", leagueId: "laliga" },
+  "atletico": { id: "atletico", name: "Atletico Madrid", logo: "https://crests.football-data.org/78.png", color: "red", leagueId: "laliga" },
+  "sevilla": { id: "sevilla", name: "Sevilla", logo: "https://crests.football-data.org/559.png", color: "white", leagueId: "laliga" },
+  "valencia": { id: "valencia", name: "Valencia", logo: "https://crests.football-data.org/95.png", color: "white", leagueId: "laliga" },
+  "betis": { id: "betis", name: "Real Betis", logo: "https://crests.football-data.org/90.png", color: "green", leagueId: "laliga" },
+
+  // Serie A
+  "juve": { id: "juve", name: "Juventus", logo: "https://crests.football-data.org/109.png", color: "black", leagueId: "seriea" },
+  "inter": { id: "inter", name: "Inter Milan", logo: "https://crests.football-data.org/108.png", color: "blue", leagueId: "seriea" },
+  "acmilan": { id: "acmilan", name: "AC Milan", logo: "https://crests.football-data.org/98.png", color: "red", leagueId: "seriea" },
+  "napoli": { id: "napoli", name: "Napoli", logo: "https://crests.football-data.org/113.png", color: "skyblue", leagueId: "seriea" },
+  "roma": { id: "roma", name: "AS Roma", logo: "https://crests.football-data.org/100.png", color: "red", leagueId: "seriea" },
+  "lazio": { id: "lazio", name: "Lazio", logo: "https://crests.football-data.org/110.png", color: "skyblue", leagueId: "seriea" },
+
+  // Bundesliga
+  "bayern": { id: "bayern", name: "Bayern Munich", logo: "https://crests.football-data.org/5.png", color: "red", leagueId: "bundesliga" },
+  "dortmund": { id: "dortmund", name: "Dortmund", logo: "https://crests.football-data.org/4.png", color: "yellow", leagueId: "bundesliga" },
+  "bayer": { id: "bayer", name: "Bayer Leverkusen", logo: "https://crests.football-data.org/3.png", color: "red", leagueId: "bundesliga" },
+  "leipzig": { id: "leipzig", name: "RB Leipzig", logo: "https://crests.football-data.org/721.png", color: "white", leagueId: "bundesliga" },
+  "frankfurt": { id: "frankfurt", name: "Eintracht Frankfurt", logo: "https://crests.football-data.org/19.png", color: "red", leagueId: "bundesliga" },
+
+  // Ligue 1
+  "psg": { id: "psg", name: "PSG", logo: "https://crests.football-data.org/524.png", color: "navy", leagueId: "ligue1" },
+  "marseille": { id: "marseille", name: "Marseille", logo: "https://crests.football-data.org/516.png", color: "skyblue", leagueId: "ligue1" },
+  "monaco": { id: "monaco", name: "AS Monaco", logo: "https://crests.football-data.org/548.png", color: "red", leagueId: "ligue1" },
+  "lyon": { id: "lyon", name: "Lyon", logo: "https://crests.football-data.org/523.png", color: "white", leagueId: "ligue1" },
+
+  // Asia
+  "alnassr": { id: "alnassr", name: "Al Nassr", logo: "https://upload.wikimedia.org/wikipedia/en/c/c5/Al_Nassr_FC_Logo.svg", color: "yellow", leagueId: "spl" },
+  "alhilal": { id: "alhilal", name: "Al Hilal", logo: "https://upload.wikimedia.org/wikipedia/en/c/cd/Al_Hilal_SFC_Logo.svg", color: "blue", leagueId: "spl" },
+  "vissel": { id: "vissel", name: "Vissel Kobe", logo: "https://upload.wikimedia.org/wikipedia/en/7/72/Vissel_Kobe_logo.svg", color: "crimson", leagueId: "jleague" },
+  "ulsan": { id: "ulsan", name: "Ulsan Hyundai", logo: "https://upload.wikimedia.org/wikipedia/en/9/92/Ulsan_Hyundai_FC_logo.svg", color: "blue", leagueId: "kleague" },
 
   // Americas
-  "miami": { id: "miami", name: "Inter Miami", logo: "https://upload.wikimedia.org/wikipedia/en/5/5c/Inter_Miami_CF_logo.svg", color: "pink" },
-  "galaxy": { id: "galaxy", name: "LA Galaxy", logo: "https://upload.wikimedia.org/wikipedia/en/7/72/LA_Galaxy_logo.svg", color: "white" },
-  "flamengo": { id: "flamengo", name: "Flamengo", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2e/Flamengo_braz_logo.svg", color: "red" },
-  "river": { id: "river", name: "River Plate", logo: "https://upload.wikimedia.org/wikipedia/en/a/ac/River_Plate_logo.svg", color: "white" },
-  "boca": { id: "boca", name: "Boca Juniors", logo: "https://upload.wikimedia.org/wikipedia/commons/c/c9/Boca_Juniors_logo18.svg", color: "blue" },
+  "miami": { id: "miami", name: "Inter Miami", logo: "https://upload.wikimedia.org/wikipedia/en/5/5c/Inter_Miami_CF_logo.svg", color: "pink", leagueId: "mls" },
+  "galaxy": { id: "galaxy", name: "LA Galaxy", logo: "https://upload.wikimedia.org/wikipedia/en/7/72/LA_Galaxy_logo.svg", color: "white", leagueId: "mls" },
+  "flamengo": { id: "flamengo", name: "Flamengo", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2e/Flamengo_braz_logo.svg", color: "red", leagueId: "brasileirao" },
+  "river": { id: "river", name: "River Plate", logo: "https://upload.wikimedia.org/wikipedia/en/a/ac/River_Plate_logo.svg", color: "white", leagueId: "libertadores" },
+  "boca": { id: "boca", name: "Boca Juniors", logo: "https://upload.wikimedia.org/wikipedia/commons/c/c9/Boca_Juniors_logo18.svg", color: "blue", leagueId: "libertadores" },
 };
 
 // Helper to generate upcoming matches
 function generateUpcomingMatches(count: number): Match[] {
   const matches: Match[] = [];
-  const teamKeys = Object.keys(MOCK_TEAMS).filter(k => ["real", "barca", "city", "arsenal", "liverpool", "bayern", "psg", "juve", "inter", "acmilan", "dortmund", "atletico", "chelsea", "manutd", "tottenham", "newcastle", "napoli", "roma", "lazio", "bayer", "leipzig"].includes(k));
+  const leagues = ["pl", "laliga", "seriea", "bundesliga", "ligue1"];
   
-  const leagues = ["pl", "laliga", "seriea", "bundesliga", "ligue1", "ucl"];
-  
+  // Group teams by leagueId
+  const teamsByLeague: Record<string, Team[]> = {};
+  Object.values(MOCK_TEAMS).forEach(team => {
+    if (!teamsByLeague[team.leagueId]) {
+      teamsByLeague[team.leagueId] = [];
+    }
+    teamsByLeague[team.leagueId].push(team);
+  });
+
   for (let i = 0; i < count; i++) {
-    const homeIdx = Math.floor(Math.random() * teamKeys.length);
-    let awayIdx = Math.floor(Math.random() * teamKeys.length);
+    // Pick a random league
+    const leagueId = leagues[Math.floor(Math.random() * leagues.length)];
+    const teams = teamsByLeague[leagueId];
+
+    // Ensure we have at least 2 teams in this league to make a match
+    if (!teams || teams.length < 2) continue;
+
+    const homeIdx = Math.floor(Math.random() * teams.length);
+    let awayIdx = Math.floor(Math.random() * teams.length);
     while (awayIdx === homeIdx) {
-      awayIdx = Math.floor(Math.random() * teamKeys.length);
+      awayIdx = Math.floor(Math.random() * teams.length);
     }
 
-    const homeTeam = MOCK_TEAMS[teamKeys[homeIdx]];
-    const awayTeam = MOCK_TEAMS[teamKeys[awayIdx]];
-    const leagueId = leagues[Math.floor(Math.random() * leagues.length)];
+    const homeTeam = teams[homeIdx];
+    const awayTeam = teams[awayIdx];
     
     // Random date in next 14 days
     const date = new Date();
@@ -165,10 +194,39 @@ function generateUpcomingMatches(count: number): Match[] {
       events: []
     });
   }
+
+  // Add Champions League matches (Cross-League)
+  // We'll take top teams from top leagues
+  const topTeams = Object.values(MOCK_TEAMS).filter(t => 
+    ["real", "barca", "city", "arsenal", "bayern", "psg", "inter"].includes(t.id)
+  );
+
+  for (let i = 0; i < 4; i++) {
+     const homeIdx = Math.floor(Math.random() * topTeams.length);
+     let awayIdx = Math.floor(Math.random() * topTeams.length);
+     while (awayIdx === homeIdx) awayIdx = Math.floor(Math.random() * topTeams.length);
+     
+     const date = new Date();
+     date.setDate(date.getDate() + Math.floor(Math.random() * 14));
+     date.setHours(20, 0, 0); // CL matches are usually late
+
+     matches.push({
+        id: `ucl_gen_${i}`,
+        leagueId: "ucl",
+        homeTeam: topTeams[homeIdx],
+        awayTeam: topTeams[awayIdx],
+        homeScore: null,
+        awayScore: null,
+        status: "scheduled",
+        startTime: date.toISOString(),
+        events: []
+     });
+  }
+
   return matches.sort((a, b) => new Date(a.startTime).getTime() - new Date(b.startTime).getTime());
 }
 
-const upcomingMatches = generateUpcomingMatches(25);
+const upcomingMatches = generateUpcomingMatches(30);
 
 export const MOCK_MATCHES: Match[] = [
   // Live
