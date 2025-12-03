@@ -7,6 +7,8 @@ import NotFound from "@/pages/not-found";
 import Login from "@/pages/login";
 import Home from "@/pages/home";
 import MatchDetails from "@/pages/match-details";
+import News from "@/pages/news";
+import Leagues from "@/pages/leagues";
 
 function Router() {
   return (
@@ -14,8 +16,8 @@ function Router() {
       <Route path="/login" component={Login} />
       <Route path="/" component={Home} />
       <Route path="/match/:id" component={MatchDetails} />
-      <Route path="/leagues" component={Home} /> {/* Reuse Home for now */}
-      <Route path="/news" component={Home} />    {/* Reuse Home for now */}
+      <Route path="/leagues" component={Leagues} />
+      <Route path="/news" component={News} />
       <Route component={NotFound} />
     </Switch>
   );
