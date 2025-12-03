@@ -54,8 +54,12 @@ export default function Leagues() {
           {filteredLeagues.map(league => (
             <Card key={league.id} className="hover:bg-card/80 transition-all cursor-pointer group border-white/5 hover:border-primary/30">
               <CardContent className="p-4 flex items-center gap-4">
-                <div className="w-12 h-12 bg-background/50 rounded-full flex items-center justify-center text-2xl shadow-inner border border-white/5 group-hover:scale-110 transition-transform">
-                  {league.logo}
+                <div className="w-12 h-12 bg-background/50 rounded-full flex items-center justify-center text-2xl shadow-inner border border-white/5 group-hover:scale-110 transition-transform p-2">
+                   {league.logo.startsWith('http') ? (
+                      <img src={league.logo} alt={league.name} className="w-full h-full object-contain" />
+                   ) : (
+                      league.logo
+                   )}
                 </div>
                 <div className="flex-1">
                   <h3 className="font-bold text-lg group-hover:text-primary transition-colors">{league.name}</h3>

@@ -73,7 +73,11 @@ export default function Home() {
                       <CardContent className="p-5">
                         <div className="flex items-center justify-between mb-4">
                           <div className="flex items-center gap-2 text-xs font-medium text-muted-foreground uppercase tracking-wider">
-                            <span className="text-lg">{league?.logo}</span>
+                            {league?.logo.startsWith('http') ? (
+                                <img src={league.logo} alt={league.name} className="w-5 h-5 object-contain" />
+                            ) : (
+                                <span className="text-lg">{league?.logo}</span>
+                            )}
                             {league?.name} • {league?.country}
                           </div>
                           <div className={`flex items-center gap-1 text-xs font-bold ${getStatusColor(match.status)}`}>
@@ -85,14 +89,20 @@ export default function Home() {
                         <div className="flex items-center justify-between">
                           {/* Home Team */}
                           <div className="flex items-center gap-4 flex-1">
-                            <div className="text-3xl">{match.homeTeam.logo}</div>
+                            {match.homeTeam.logo.startsWith('http') ? (
+                                <img src={match.homeTeam.logo} alt={match.homeTeam.name} className="w-8 h-8 md:w-12 md:h-12 object-contain" />
+                            ) : (
+                                <div className="text-3xl">{match.homeTeam.logo}</div>
+                            )}
                             <span className="text-lg font-bold md:text-xl">{match.homeTeam.name}</span>
                           </div>
 
                           {/* Score */}
-                          <div className="px-6 py-2 bg-background/50 rounded-lg font-mono font-bold text-2xl md:text-3xl tracking-widest border border-white/5 shadow-inner min-w-[100px] text-center">
+                          <div className="px-6 py-2 bg-background/50 rounded-lg font-mono font-bold text-2xl md:text-3xl tracking-widest border border-white/5 shadow-inner min-w-[100px] text-center mx-4">
                             {match.status === "scheduled" ? (
-                              <span className="text-base text-muted-foreground font-sans font-medium">
+                              <span className="text-base text-muted-foreground font-sans font-medium block whitespace-nowrap">
+                                {new Date(match.startTime).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
+                                <br/>
                                 {new Date(match.startTime).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
                               </span>
                             ) : (
@@ -103,7 +113,11 @@ export default function Home() {
                           {/* Away Team */}
                           <div className="flex items-center gap-4 flex-1 justify-end">
                             <span className="text-lg font-bold md:text-xl text-right">{match.awayTeam.name}</span>
-                            <div className="text-3xl">{match.awayTeam.logo}</div>
+                            {match.awayTeam.logo.startsWith('http') ? (
+                                <img src={match.awayTeam.logo} alt={match.awayTeam.name} className="w-8 h-8 md:w-12 md:h-12 object-contain" />
+                            ) : (
+                                <div className="text-3xl">{match.awayTeam.logo}</div>
+                            )}
                           </div>
                         </div>
                         
@@ -141,7 +155,13 @@ export default function Home() {
               <CardContent className="p-2">
                 {MOCK_LEAGUES.map(league => (
                   <div key={league.id} className="flex items-center gap-3 p-3 hover:bg-white/5 rounded-lg cursor-pointer transition-colors group">
-                    <span className="text-2xl group-hover:scale-110 transition-transform duration-200">{league.logo}</span>
+                    <div className="w-8 h-8 flex items-center justify-center">
+                        {league.logo.startsWith('http') ? (
+                            <img src={league.logo} alt={league.name} className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-200" />
+                        ) : (
+                            <span className="text-2xl group-hover:scale-110 transition-transform duration-200">{league.logo}</span>
+                        )}
+                    </div>
                     <div className="flex-1">
                       <div className="font-bold text-sm">{league.name}</div>
                       <div className="text-xs text-muted-foreground">{league.country}</div>
