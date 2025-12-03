@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Search, Globe, ChevronRight, Star } from "lucide-react";
+import { Link } from "wouter";
 
 export default function Leagues() {
   const [search, setSearch] = useState("");
@@ -52,28 +53,30 @@ export default function Leagues() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredLeagues.map(league => (
-            <Card key={league.id} className="hover:bg-card/80 transition-all cursor-pointer group border-white/5 hover:border-primary/30">
-              <CardContent className="p-4 flex items-center gap-4">
-                <div className="w-12 h-12 bg-background/50 rounded-full flex items-center justify-center text-2xl shadow-inner border border-white/5 group-hover:scale-110 transition-transform p-2">
-                   {league.logo.startsWith('http') ? (
-                      <img src={league.logo} alt={league.name} className="w-full h-full object-contain" />
-                   ) : (
-                      league.logo
-                   )}
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-bold text-lg group-hover:text-primary transition-colors">{league.name}</h3>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <span>{league.flag}</span>
-                    <span>{league.country}</span>
-                  </div>
-                </div>
-                <div className="flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                   <Star className="w-4 h-4 text-muted-foreground hover:text-yellow-400 transition-colors" />
-                   <ChevronRight className="w-4 h-4 text-muted-foreground" />
-                </div>
-              </CardContent>
-            </Card>
+            <Link key={league.id} href={`/league/${league.id}`}>
+                <Card className="hover:bg-card/80 transition-all cursor-pointer group border-white/5 hover:border-primary/30">
+                <CardContent className="p-4 flex items-center gap-4">
+                    <div className="w-12 h-12 bg-background/50 rounded-full flex items-center justify-center text-2xl shadow-inner border border-white/5 group-hover:scale-110 transition-transform p-2">
+                    {league.logo.startsWith('http') ? (
+                        <img src={league.logo} alt={league.name} className="w-full h-full object-contain" />
+                    ) : (
+                        league.logo
+                    )}
+                    </div>
+                    <div className="flex-1">
+                    <h3 className="font-bold text-lg group-hover:text-primary transition-colors">{league.name}</h3>
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <span>{league.flag}</span>
+                        <span>{league.country}</span>
+                    </div>
+                    </div>
+                    <div className="flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Star className="w-4 h-4 text-muted-foreground hover:text-yellow-400 transition-colors" />
+                    <ChevronRight className="w-4 h-4 text-muted-foreground" />
+                    </div>
+                </CardContent>
+                </Card>
+            </Link>
           ))}
         </div>
       </div>

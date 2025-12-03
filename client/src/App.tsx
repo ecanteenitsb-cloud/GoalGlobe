@@ -9,6 +9,7 @@ import Home from "@/pages/home";
 import MatchDetails from "@/pages/match-details";
 import News from "@/pages/news";
 import Leagues from "@/pages/leagues";
+import LeagueDetails from "@/pages/league-details";
 
 function Router() {
   return (
@@ -17,6 +18,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/match/:id" component={MatchDetails} />
       <Route path="/leagues" component={Leagues} />
+      <Route path="/league/:id" component={LeagueDetails} />
       <Route path="/news" component={News} />
       <Route component={NotFound} />
     </Switch>

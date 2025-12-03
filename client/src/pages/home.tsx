@@ -153,22 +153,29 @@ export default function Home() {
             </h3>
             <Card className="bg-card/50 backdrop-blur-sm">
               <CardContent className="p-2">
-                {MOCK_LEAGUES.map(league => (
-                  <div key={league.id} className="flex items-center gap-3 p-3 hover:bg-white/5 rounded-lg cursor-pointer transition-colors group">
-                    <div className="w-8 h-8 flex items-center justify-center">
-                        {league.logo.startsWith('http') ? (
-                            <img src={league.logo} alt={league.name} className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-200" />
-                        ) : (
-                            <span className="text-2xl group-hover:scale-110 transition-transform duration-200">{league.logo}</span>
-                        )}
+                {MOCK_LEAGUES.slice(0, 6).map(league => (
+                  <Link key={league.id} href={`/league/${league.id}`}>
+                    <div className="flex items-center gap-3 p-3 hover:bg-white/5 rounded-lg cursor-pointer transition-colors group">
+                        <div className="w-8 h-8 flex items-center justify-center">
+                            {league.logo.startsWith('http') ? (
+                                <img src={league.logo} alt={league.name} className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-200" />
+                            ) : (
+                                <span className="text-2xl group-hover:scale-110 transition-transform duration-200">{league.logo}</span>
+                            )}
+                        </div>
+                        <div className="flex-1">
+                        <div className="font-bold text-sm">{league.name}</div>
+                        <div className="text-xs text-muted-foreground">{league.country}</div>
+                        </div>
+                        <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-primary opacity-0 group-hover:opacity-100 transition-all" />
                     </div>
-                    <div className="flex-1">
-                      <div className="font-bold text-sm">{league.name}</div>
-                      <div className="text-xs text-muted-foreground">{league.country}</div>
-                    </div>
-                    <ChevronRight className="w-4 h-4 text-muted-foreground group-hover:text-primary opacity-0 group-hover:opacity-100 transition-all" />
-                  </div>
+                  </Link>
                 ))}
+                <Link href="/leagues">
+                    <div className="p-3 text-center text-sm text-primary hover:underline cursor-pointer">
+                        View All Leagues
+                    </div>
+                </Link>
               </CardContent>
             </Card>
           </div>
